@@ -1,0 +1,16 @@
+.card{
+    width:calc(33.33% - 50px/3);
+    border:1px solid #E6E8EC;
+    height:330px;
+    margin-right: 25px;
+    margin-bottom: 25px;
+    border-radius: 10px;
+}
+
+.card:nth-child(3n)
+{
+    margin-right: 0;
+}
+.card-item{
+    padding:0px;    
+}

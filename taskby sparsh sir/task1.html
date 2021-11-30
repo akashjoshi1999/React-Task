@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>To Do List</title>
+</head>
+
+<body style="background-color: gray;">
+    <div style="text-align: center;">
+        <h1 style="color:firebrick;">To Do List</h1>
+        <div>
+            <input type="text" class="input" id="input" style="color: #0b5ee3; font-size:larger;"
+                placeholder="write something">
+            <button type="submit" id="additem" class="additem"
+                style="font-size: larger; background-color: green; color: white;">Add</button>
+        </div>
+        <div class="container" style="padding-top: 10px;"> </div>
+    </div>
+    <script>
+
+        const additem = document.querySelector('.additem');
+        const inputField = document.querySelector('.input');
+        const container = document.querySelector('.container');
+
+        additem.addEventListener('click', function () {
+            if (inputField.value != "") {
+                let input = document.createElement('input');
+                input.value = inputField.value;
+                input.style.color = "#0b5ee3";
+                input.style.fontSize="larger"
+                input.type = "text";
+                input.disabled = true;
+
+                let div = document.createElement("div");
+                div.style.padding = "5px";
+
+                let remove = document.createElement('button');
+                remove.innerHTML = "Delete";
+                remove.style.backgroundColor="red";
+                remove.style.fontSize="larger";
+
+                let edit = document.createElement('button');
+                edit.innerHTML = "Edit";
+                edit.style.fontSize="larger";
+                edit.style.backgroundColor="green";
+
+                remove.addEventListener('click', function () {
+                    container.removeChild(div);
+                })
+
+                edit.addEventListener('click', function () {
+                    input.disabled = false;
+                    var iti = input.value;
+
+                    edit.addEventListener('dblclick', function () {
+                        input.disabled = true;
+                    })
+
+                })
+
+                container.appendChild(div);
+
+                div.appendChild(input);
+                div.appendChild(remove);
+                div.appendChild(edit);
+
+                inputField.value = "";
+            }
+            else{
+                alert("please add first")
+            }
+        })
+
+    </script>
+</body>
+
+</html>

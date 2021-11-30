@@ -1,0 +1,25 @@
+.image-cat{
+    margin: 0;
+    padding: 0;
+    position: relative;
+    height:180px;
+    border-radius: 7px;
+}
+
+.img-low{
+    max-width: 100%;
+    height: auto;
+    border-radius: 7px;
+}
+
+.cat{
+    position: absolute;
+    bottom: 5px;
+    right: 16px;
+    font-size: 16px;
+    margin:0;
+    padding:2px 10px;
+    color: white;
+    background-color: #777E91;
+    border-radius: 5px;
+}

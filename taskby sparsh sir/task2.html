@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<body>
+    <h1>Counter</h1>
+    <p>blue for odd/red for even numbers</p>
+    <div>
+        <div>
+            <input type="text" id="counterNum" class="input" disabled="true" />
+        </div>
+        <div>
+            <button id="inc">INCRESE</button>
+            <button id="res">RESET</button>
+            <button id="dec">DECRESE</button>
+        </div>
+    </div>
+</body>
+<script>
+    var counter = 0;
+    const inputField = document.querySelector('.input');
+
+    var num = document.getElementById('counterNum');
+    num.value = counter;
+    num.style.color = "black";
+    
+    var increse = document.getElementById('inc');
+    increse.addEventListener('click', function () {
+        counter++;
+        setCounter(counter);
+    })
+
+    var decrese = document.getElementById('dec');
+    decrese.addEventListener('click', function () {
+        counter--;
+        setCounter(counter);
+    })
+
+    var reset = document.getElementById('res');
+    reset.addEventListener('click', function () {
+        counter = 0;
+        setCounter(counter);
+    })
+
+    function setCounter() {
+        num.value = counter;
+        if (counter % 2 == 0) {
+            num.style.color = "red";
+        } else {
+            num.style.color = "blue";
+        }
+        if (counter == 0) {
+            num.style.color = "black";
+        }
+    }
+
+</script>
+
+</html>

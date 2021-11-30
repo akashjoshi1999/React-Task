@@ -1,0 +1,10 @@
+.main{
+    max-width:900px;
+    margin: 10px auto;
+ }
+ 
+ .container-wrapper{
+    display: flex;  
+    flex-wrap: wrap;
+    padding: 0;
+ }
