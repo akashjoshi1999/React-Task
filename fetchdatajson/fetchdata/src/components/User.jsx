@@ -7,7 +7,7 @@ const User = () => {
     const [isLoaded, setIsLoaded] = useState(false);
     const [data, setData] = useState([]);
     useEffect(() => {
-        fetch("http://localhost:3001/users")
+        fetch("http://localhost:3002/users")
             .then(res => res.json())
             .then(
                 (result) => {
@@ -55,8 +55,7 @@ const User = () => {
             catchPhrase: catchPhrase,
             bs: bs
         }).then((response) => {
-            console.log("success");
-            console.log(response);
+            setData(response);
         });
         clearform()
     }
@@ -70,7 +69,7 @@ const User = () => {
         Axios.post("http://localhost:3007/delete_user", {
             userId: user_id,
         }).then((response) => {
-            setData(response.data);
+            setData(response);
         });
     };
 
@@ -129,8 +128,7 @@ const User = () => {
             catchPhrase: catchPhrase,
             bs: bs
         }).then((response) => {
-            console.log("success");
-            console.log(response);
+            setData(response)
         });
         clearform()
     }
@@ -248,10 +246,10 @@ const User = () => {
                         </thead>
                         <tbody>
 
-                            {data.map((item) => {
+                            {data.map((item, index) => {
                                 return (
                                     <tr key={item.id}>
-                                        <td>{item.id}</td>
+                                        <td>{index + 1}</td>
                                         <td>{item.name}</td>
                                         <td>{item.title}</td>
                                         <td>{item.username}</td>

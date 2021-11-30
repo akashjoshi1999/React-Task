@@ -28,7 +28,7 @@ app.post('/addusers', (req, res) => {
     fs.readFile('db.json', 'utf8', function (err, data) {
         var obj = JSON.parse(data);
         let newobj = {
-            "id": obj["users"].length + 1,
+            "id": Math.random().toString(36).substr(2, 9),
             "name": name,
             "username": username,
             "email": email,
@@ -67,7 +67,7 @@ app.post('/addposts', (req, res) => {
         var obj = JSON.parse(data);
         let newobj = {
             "userId": 1,
-            "id": obj["posts"].length + 1,
+            "id": Math.random().toString(36).substr(2, 9),
             "title": title,
             "body": body
         }
@@ -85,8 +85,7 @@ app.post('/delete_post', (req, res) => {
     const post_id = req.body.postId;
     const data = fs.readFileSync('db.json');
     const obj = JSON.parse(data);
-    const posts = obj["posts"];
-    console.log(post_id);
+    const posts = obj["posts"]; 
     obj["posts"] = posts.filter((item) => item.id !== post_id);
     fs.writeFileSync('db.json', JSON.stringify(obj, null, 2));
 })
@@ -96,7 +95,6 @@ app.post('/delete_user', (req, res) => {
     const data = fs.readFileSync('db.json');
     const obj = JSON.parse(data);
     const users = obj["users"];
-    console.log(user_id);
     obj["users"] = users.filter((item) => item.id !== user_id);
     fs.writeFileSync('db.json', JSON.stringify(obj, null, 2));
 })
@@ -121,7 +119,7 @@ app.post('/editusers', (req, res) => {
     const bs = req.body.bs;
     fs.readFile('db.json', 'utf8', function (err, data) {
         var obj = JSON.parse(data);
-        obj['users'][id].id = id + 1;
+        obj['users'][id].id = id;
         obj['users'][id].name = name
         obj['users'][id].username = username
         obj['users'][id].email = email
@@ -136,7 +134,6 @@ app.post('/editusers', (req, res) => {
         obj['users'][id].company.compnayName = compnayName
         obj['users'][id].company.catchPhrase = catchPhrase
         obj['users'][id].company.bs = bs
-        console.log(obj['users'][id]);
         var strNotes = JSON.stringify(obj, null, 2);
         fs.writeFile('db.json', strNotes, function (err) {
             if (err) return console.log(err);
@@ -153,7 +150,7 @@ app.post('/editposts', (req, res) => {
     const title = req.body.title;
     fs.readFile('db.json', 'utf8', function (err, data) {
         var obj = JSON.parse(data);
-        obj['posts'][id].id = id + 1;
+        obj['posts'][id].id = id;
         obj['posts'][id].body = body
         obj['posts'][id].title = title
         var strNotes = JSON.stringify(obj, null, 2);
