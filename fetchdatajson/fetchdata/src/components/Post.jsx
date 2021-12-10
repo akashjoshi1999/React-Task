@@ -1,67 +1,43 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useReducer } from 'react'
 import Axios from 'axios';
+import reducer from './reducer';
 
+const initialValue = {
+    title: '',
+    post: ''
+}
 const Post = () => {
 
-    const [error, setError] = useState(null);
-    const [isLoaded, setIsLoaded] = useState(false);
+    // const [error, setError] = useState(null);
+    // const [isLoaded, setIsLoaded] = useState(false);
     const [data, setData] = useState([]);
     const [show, setShow] = useState(true);
     const [id, setId] = useState('')
-    const [title, settitle] = useState("")
-    const [body, setbody] = useState("")
+    // const [title, settitle] = useState("")
+    // const [body, setbody] = useState("")
 
     useEffect(() => {
         const abc = setTimeout(
-            Axios.get("http://localhost:3002/posts").then((response) => {
+            Axios.get("http://localhost:3010/posts").then((response) => {
                 if (response.data) {
                     setData(response.data);
                 }
             })
             , 1000)
+        console.log(data)
         return () => clearTimeout(abc)
     }, [])
 
+    const [state, dispatch] = useReducer(reducer, initialValue)
+
     const submitHanlder = (e) => {
         e.preventDefault();
-        // const requestOptions = {
-        //     method: 'POST',
-        //     headers: { 'Content-Type': 'application/json' },
-        //     body: JSON.stringify({
-        //         title: title,
-        //         body: body
-        //     })
-        // };
-        // fetch('http://localhost:3007/addposts', requestOptions)
-        //     .then(response => {
-        //         console.log(" onsl", response);
-        //         response.json()
-        //     })
-        //     .then(data => {
-        //         setData(data)
-        //         console.log(data)
-        //     });
-        // fetch('http://localhost:3007/addposts').then()
-        Axios.post('http://localhost:3007/addposts', {
+        Axios.post('http://localhost:3010/posts', {
             title: title,
             body: body
         }).then((response, err) => {
             console.log("success");
             console.log(response);
-            // console.log("res:", response);
-            // if (!err) {
-            //     let newobj = {
-            //         "userId": 1,
-            //         "id": Math.random().toString(36).substr(2, 9),
-            //         "title": title,
-            //         "body": body
-            //     }
-            //     console.log("data lehnth", data.length)
-            //     let abc = [...data, newobj];
-            //     console.log("abc len", abc.length)
-            //     setData(abc);
-            // }
-            // setData()
         });
         clearForm()
     }
@@ -69,38 +45,7 @@ const Post = () => {
 
     const editPosts = (e) => {
         e.preventDefault();
-        // const requestOptions = {
-        //     method: 'POST',
-        //     headers: { 'Content-Type': 'application/json' },
-        //     body: JSON.stringify({
-        //         id: 128,
-        //         title: title,
-        //         body: body
-        //     })
-        // };
-        // fetch('http://localhost:3007/editposts', requestOptions)
-        //     .then(response => response.json())
-        //     .then(data => setData(data));
-        // let newobj = {
-        //     "userId": 1,
-        //     "id": Math.random().toString(36).substr(2, 9),
-        //     "title": title,
-        //     "body": body
-        // }
-        // let obj = {
-        //     "userId": 1,
-        //     "id": Math.random().toString(36).substr(2, 9),
-        //     "title": title,
-        //     "body": body
-        // }
-        // console.log("data lehnth", data.length)
-        // let abc = [...data, newobj];
-        // console.log("abc len", abc.length)
-        // data.(...newobj);
-        // console.log("data",data)
-        // console.log("syifbg",abc);
-        // setData(abc);
-        Axios.post('http://localhost:3007/editposts', {
+        Axios.put('http://localhost:3010/posts/', {
             id: id,
             body: body,
             title: title
@@ -145,7 +90,7 @@ const Post = () => {
                         <div className="row">
                             <div className="col-md-6">
                                 <label>Enter title</label>
-                                <input type="text" size="150" value={title} required onChange={(e) => settitle(e.target.value)} className="form-control" name="exampleInputEmail1" placeholder="Enter Name" />
+                                <input type="text" size="150" value={statetitle} required onChange={(e) => settitle(e.target.value)} className="form-control" name="exampleInputEmail1" placeholder="Enter Name" />
                             </div>
                             <div className="col-md-6">
                                 <label>Enter body</label>
